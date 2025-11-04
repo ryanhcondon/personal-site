@@ -338,9 +338,10 @@ a:hover {
    Links Section
    =========================== */
 .links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--spacing-md);
+    justify-content: center;
 }
 
 .link-card {
@@ -350,8 +351,17 @@ a:hover {
     border: 2px solid var(--color-border);
     text-align: center;
     transition: var(--transition);
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     color: var(--color-text);
+    width: 250px;
+    min-height: 120px;
+}
+
+.link-card-highlighted {
+    border-color: var(--color-accent);
+    background-color: rgba(52, 152, 219, 0.05);
 }
 
 .link-card:hover {
@@ -359,6 +369,15 @@ a:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     color: var(--color-text);
+}
+
+.link-note {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    text-align: center;
 }
 
 .link-card h3 {
