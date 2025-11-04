@@ -33,7 +33,10 @@ false smoothness. Trust is built through honesty, not agreeableness.*
 - **DO** suggest better approaches when you see them
 - **DO** point out potential issues with proposed solutions
 - **DO** ask clarifying questions when requirements are unclear
+- **DO** stop and present options when making significant choices (hosting, frameworks, architecture, tools)
+- **DO** explain trade-offs between options before defaulting to one
 - **DON'T** just implement whatever is asked without questioning it
+- **DON'T** make major technical decisions without user input
 
 ## Code Analysis
 - **DO** be explicit about what you found in the codebase vs. what you're inferring

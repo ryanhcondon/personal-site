@@ -141,6 +141,7 @@ Before committing, verify:
 ## When Agent Should Warn
 
 The AI assistant should proactively flag:
+- Making significant technical choices (hosting, deployment, architecture, tools) without discussing options
 - Complex JavaScript when simple HTML/CSS would work
 - Skipping visual validation before approval
 - Non-responsive design (mobile not considered)
