@@ -1,0 +1,149 @@
+# Development Process & Best Practices
+
+## Git Workflow (Lightweight)
+
+### Approach
+- **Work on main branch** - no need for feature branches (solo project)
+- Use git primarily for **version history** and deployment
+- Commit at logical milestones when you're happy with progress
+- Keep it simple and casual - git as a tool, not a gate
+
+### When to Commit
+- After completing a section that works well
+- Before making risky changes (easy rollback point)
+- At the end of a work session
+- When you want to save a "checkpoint" you might return to
+- **Not required** to gate every chunk - commit when it feels natural
+
+### Good Commit Points
+- "Initial HTML structure and basic styling"
+- "Add About and Experience sections"
+- "Responsive design improvements"
+- "Ready for deployment"
+
+### Commit Best Practices
+- Write clear commit messages describing what changed
+- Stage files selectively (`git add specific-file.css`)
+- Test in browser before committing (make sure it looks good)
+- Use `git status` and `git diff` to review what you're committing
+
+## Chunk-Based Development
+
+Break the website into independently testable sections:
+
+### Standard Chunk Pattern
+1. **Plan**: Define clear scope for the section (e.g., "About section with bio text")
+2. **Implement**: Write HTML/CSS/JS for the section
+3. **AI Validation**: 
+   - Check code syntax
+   - Verify files were created/updated
+   - Basic structure checks
+4. **Human Validation**: 
+   - Open in browser and review visual appearance
+   - Check on different screen widths (desktop, tablet, mobile)
+   - Test any interactive elements
+   - Verify content displays correctly
+5. **Iterate if needed**: Fix issues found during validation
+6. **Move forward**: Proceed to next chunk after approval
+7. **Commit when natural**: Save checkpoints at logical milestones (not required after every chunk)
+
+### Example (Website Build)
+- **Chunk 1**: Basic HTML structure and header → test in browser
+- **Chunk 2**: About section with styling → test appearance
+- **Chunk 3**: Experience section → test layout
+- **Chunk 4**: Links and contact section → test functionality
+- **Chunk 5**: Responsive design refinements → test on mobile
+- **Chunk 6**: Deployment configuration → test live URL
+
+## Testing Strategy
+
+### Visual Validation
+For web development, primary testing is visual:
+- **Open in browser**: Use browser preview or local file
+- **Screen sizes**: Test desktop (1920px), tablet (768px), mobile (375px)
+- **Cross-browser** (if time permits): Chrome, Safari, Firefox
+- **Interactive elements**: Click links, test any JavaScript
+
+### Manual Checks
+- **Content accuracy**: Text displays as intended
+- **Images**: Load correctly, appropriate sizes
+- **Links**: External links work, open in correct tab
+- **Layout**: Sections aligned properly, no overflow issues
+- **Typography**: Readable fonts, appropriate sizes
+- **Colors**: Professional appearance, good contrast
+
+### Basic Functionality Testing
+Before committing, verify:
+- All internal navigation works
+- External links point to correct URLs
+- Images load (no broken image icons)
+- Page displays without JavaScript errors (check console)
+
+## Code Organization
+
+### File Structure
+```
+/
+├── index.html          # Main page
+├── styles.css          # All styles
+├── script.js           # JavaScript (if needed)
+├── images/             # Image assets
+│   └── ...
+├── .cursor/
+│   └── rules/          # Project guidelines
+├── PROJECT_PLAN.md     # High-level plan
+└── README.md           # Deployment and update instructions
+```
+
+### HTML Best Practices
+- Use semantic HTML5 elements (`<header>`, `<section>`, `<nav>`, etc.)
+- Add appropriate ARIA labels for accessibility
+- Keep structure clean and commented
+
+### CSS Best Practices
+- Use CSS custom properties (variables) for colors, fonts, spacing
+- Mobile-first approach (base styles for mobile, media queries for desktop)
+- Comment major sections
+- Keep specificity low (avoid unnecessary nesting)
+
+### JavaScript Best Practices
+- Keep minimal - only add if needed for real functionality
+- Progressive enhancement (site works without JS)
+- Clean, commented code
+
+## Deployment
+
+### Preparation
+- Verify all paths are relative (not absolute local paths)
+- Test final version locally
+- Check for any console errors
+- Validate HTML/CSS if desired
+
+### Hosting Options
+- **Vercel**: Simple CLI deployment
+- **Netlify**: Drag-and-drop or CLI
+- **GitHub Pages**: Git-based deployment
+
+### After Deployment
+- Test live URL thoroughly
+- Verify all assets load correctly
+- Check on mobile device (real device, not just DevTools)
+
+## Common Pitfalls to Avoid
+
+1. **Not testing in browser** before moving forward
+2. **Breaking existing sections** when adding new ones
+3. **Using absolute file paths** that won't work when deployed
+4. **Not testing mobile responsiveness** until the end
+5. **Overly complex code** when simple HTML/CSS would suffice
+6. **Forgetting to commit** at good checkpoint moments
+
+## When Agent Should Warn
+
+The AI assistant should proactively flag:
+- Complex JavaScript when simple HTML/CSS would work
+- Skipping visual validation before approval
+- Non-responsive design (mobile not considered)
+- Accessibility issues (missing alt text, poor contrast, etc.)
+- File paths that won't work when deployed
+- Making too many changes without a checkpoint commit (suggest committing)
