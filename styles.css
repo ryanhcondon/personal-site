@@ -139,15 +139,72 @@ a:hover {
     text-align: center;
 }
 
-.hero-image {
+.headshot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-image-wrapper {
     width: 180px;
     height: 180px;
     border-radius: 50%;
+    border: 4px solid var(--color-background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center 20%;
-    border: 4px solid var(--color-background);
-    margin-bottom: var(--spacing-md);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.hero-image-zoomed {
+    transform: scale(1.1);
+    object-position: center 18%;
+}
+
+.headshot-caption {
+    color: var(--color-background);
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.85;
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.headshot-toggle {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.toggle-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-background);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--color-background);
+}
+
+.toggle-btn.active {
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    border-color: var(--color-background);
 }
 
 .hero-title {
@@ -474,6 +531,11 @@ a:hover {
     .hero-image {
         width: 120px;
         height: 120px;
+    }
+    
+    .toggle-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.75rem;
     }
     
     .hero-title {
