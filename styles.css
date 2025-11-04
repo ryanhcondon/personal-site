@@ -528,7 +528,7 @@ a:hover {
         padding: var(--spacing-lg) 0;
     }
     
-    .hero-image {
+    .hero-image-wrapper {
         width: 120px;
         height: 120px;
     }
