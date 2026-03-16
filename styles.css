@@ -126,6 +126,11 @@ a:hover {
     margin: 0 auto;
 }
 
+.section-content--wide {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
 /* ===========================
    Hero Section
    =========================== */
@@ -548,7 +553,7 @@ a:hover {
     color: var(--color-text-light);
     font-size: 1.05rem;
     margin-bottom: var(--spacing-md);
-    max-width: 720px;
+    max-width: 1000px;
 }
 
 .portfolio-subhead {
