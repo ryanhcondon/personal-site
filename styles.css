@@ -542,6 +542,78 @@ a:hover {
 }
 
 /* ===========================
+   Portfolio Page
+   =========================== */
+.portfolio-intro {
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+    margin-bottom: var(--spacing-md);
+    max-width: 720px;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+.portfolio-card {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--color-accent);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.portfolio-card-body {
+    flex: 1;
+}
+
+.portfolio-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.portfolio-card-title {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.portfolio-card-desc {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.portfolio-link {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    transition: var(--transition);
+}
+
+.portfolio-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-active {
+    background-color: var(--color-background-alt);
+    color: var(--color-accent) !important;
+}
+
+/* ===========================
    Footer
    =========================== */
 .footer {
