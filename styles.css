@@ -551,6 +551,16 @@ a:hover {
     max-width: 720px;
 }
 
+.portfolio-subhead {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+}
+
+.portfolio-subhead:first-of-type {
+    margin-top: var(--spacing-md);
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: 1fr;
