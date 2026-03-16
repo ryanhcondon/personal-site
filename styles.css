@@ -555,6 +555,7 @@ a:hover {
     font-size: 1.3rem;
     color: var(--color-primary);
     margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+    width: 100%;
 }
 
 .portfolio-subhead:first-of-type {
