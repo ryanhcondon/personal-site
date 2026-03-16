@@ -549,11 +549,17 @@ a:hover {
 /* ===========================
    Portfolio Page
    =========================== */
+.section--intro {
+    padding: var(--spacing-md) 0;
+    text-align: center;
+}
+
 .portfolio-intro {
     color: var(--color-text-light);
-    font-size: 1.05rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+    font-style: italic;
     max-width: 1000px;
+    margin: 0 auto;
 }
 
 .portfolio-subhead {
