@@ -97,6 +97,7 @@ a:hover {
 
 .section {
     padding: var(--spacing-xl) 0;
+    scroll-margin-top: 4rem; /* keep anchored titles clear of the sticky nav */
 }
 
 .section-alt {
@@ -579,6 +580,12 @@ a:hover {
     gap: var(--spacing-md);
 }
 
+@media (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 .portfolio-card {
     background-color: var(--color-background);
     border-radius: var(--border-radius);
@@ -589,6 +596,12 @@ a:hover {
     flex-direction: column;
     justify-content: space-between;
     gap: var(--spacing-sm);
+    transition: var(--transition);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .portfolio-card-body {
@@ -633,6 +646,42 @@ a:hover {
 .nav-active {
     background-color: var(--color-background-alt);
     color: var(--color-accent) !important;
+}
+
+/* ===========================
+   Projects Section
+   =========================== */
+.projects-intro {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto var(--spacing-md) auto;
+}
+
+.project-chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    padding: 0;
+}
+
+.project-chips li {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-secondary);
+    background-color: var(--color-background-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 0.2rem 0.75rem;
+}
+
+.portfolio-link--muted {
+    color: var(--color-text-light);
+    font-style: italic;
+    font-weight: 500;
 }
 
 /* ===========================

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ryan Condon - Portfolio of writing and data work">
+    <meta name="description" content="Ryan Condon - Portfolio of software projects, writing, and data work">
     <title>Portfolio — Ryan Condon</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <h1 class="hero-title">Ryan Condon</h1>
-            <p class="hero-subtitle">Writing Portfolio</p>
+            <p class="hero-subtitle">Portfolio</p>
         </div>
     </header>
 
@@ -39,12 +39,55 @@
         <!-- Intro -->
         <section class="section section--intro">
             <div class="container">
-                <p class="portfolio-intro">Across contexts, my writing seeks to take a complex system, build a framework for understanding it, and explain it accessibly.</p>
+                <p class="portfolio-intro">Across contexts, my work seeks to take a complex system, build a framework for understanding it, and make it accessible — in writing and in software.</p>
+            </div>
+        </section>
+
+        <!-- Coding Projects -->
+        <section id="projects" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Coding Projects</h2>
+                <div class="section-content section-content--wide">
+                    <p class="projects-intro">Things I've designed and shipped with AI pair-programming tools — from data pipeline to deployed product.</p>
+                    <div class="portfolio-grid projects-grid">
+
+                        <div class="portfolio-card project-card">
+                            <div class="portfolio-card-body">
+                                <p class="portfolio-tag">Daily Web Game · Live</p>
+                                <h3 class="portfolio-card-title">7-0</h3>
+                                <p class="portfolio-card-desc">A free daily Magic: The Gathering puzzle game. Follow a real 7-0 (trophy) draft from a top-ranked <a href="https://www.17lands.com" target="_blank" rel="noopener noreferrer">17lands</a> player pick by pick, predict each pick, and share your Wordle-style results. I built the whole pipeline: filtering 4.5M rows of public draft data down to curated puzzles in Python, a React/Next.js front end with daily and quick-play modes, and automated deploys on Vercel.</p>
+                                <ul class="project-chips">
+                                    <li>Python</li>
+                                    <li>Next.js / React</li>
+                                    <li>Vercel</li>
+                                    <li>Supabase</li>
+                                </ul>
+                            </div>
+                            <a href="https://7-0-mauve.vercel.app" class="portfolio-link" target="_blank" rel="noopener noreferrer">Play 7-0 →</a>
+                        </div>
+
+                        <div class="portfolio-card project-card">
+                            <div class="portfolio-card-body">
+                                <p class="portfolio-tag">Team Tool · In Use</p>
+                                <h3 class="portfolio-card-title">Lock-In</h3>
+                                <p class="portfolio-card-desc">A shared deck-registration board built for my Pro Tour testing team. Each teammate maintains a live probability split over the archetypes they might register — always summing to 100% — and the whole team watches everyone's read (and the team average) drift as the event approaches, with a heat-mapped board, drift charts, full change history, and Discord notifications. Zero-dependency Node.js with an append-only event log, so concurrent updates never conflict.</p>
+                                <ul class="project-chips">
+                                    <li>Node.js</li>
+                                    <li>Vanilla JS</li>
+                                    <li>Supabase</li>
+                                    <li>Discord webhooks</li>
+                                </ul>
+                            </div>
+                            <span class="portfolio-link portfolio-link--muted">Private team tool — happy to demo!</span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Data Infrastructure & Documentation -->
-        <section id="data-infrastructure" class="section section-alt">
+        <section id="data-infrastructure" class="section">
             <div class="container">
                 <h2 class="section-title">Data Infrastructure &amp; Documentation</h2>
                 <div class="section-content section-content--wide">
@@ -83,7 +126,7 @@
         </section>
 
         <!-- MTG Strategy & Competitive Systems -->
-        <section id="mtg" class="section">
+        <section id="mtg" class="section section-alt">
             <div class="container">
                 <h2 class="section-title">MTG Strategy &amp; Competitive Systems</h2>
                 <div class="section-content section-content--wide">
@@ -134,7 +177,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Ryan Condon. All rights reserved.</p>
+            <p>&copy; 2026 Ryan Condon. All rights reserved.</p>
         </div>
     </footer>
 
