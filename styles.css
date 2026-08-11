@@ -659,6 +659,38 @@ a:hover {
     margin: 0 auto var(--spacing-md) auto;
 }
 
+.project-tools {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.project-tools li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.project-tools li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+}
+
+.project-tools + .portfolio-card-desc {
+    margin-top: var(--spacing-sm);
+}
+
 .project-chips {
     list-style: none;
     display: flex;
