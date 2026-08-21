@@ -40,3 +40,16 @@ test('collapses the whitespace contenteditable leaves behind', () => {
 test('a bare < is treated as text, not a tag', () => {
   assert.equal(sanitize('1 < 2'), '1 &lt; 2');
 });
+
+test('relative links survive — the site is full of them', () => {
+  for (const href of ['content/report.pdf', 'content/(9+)%20Customer%20LTV%20Model.pdf',
+                      './a.pdf', 'portfolio.html#skills', '/abs', '#anchor']) {
+    assert.match(sanitize(`<a href="${href}">x</a>`), /<a href=/, `dropped ${href}`);
+  }
+});
+
+test('executable and protocol-relative schemes are still refused', () => {
+  for (const href of ['javascript:alert(1)', 'data:text/html;base64,x', 'vbscript:x', '//evil.com']) {
+    assert.equal(sanitize(`<a href="${href}">x</a>`), 'x', `allowed ${href}`);
+  }
+});

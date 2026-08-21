@@ -174,10 +174,27 @@ conflict — never a lost edit.
 
 ### What is editable
 
-Every `<p>`, `<li>`, and heading inside `<main>` carries a `data-edit="id"`
-attribute — 124 regions across the two pages. Only marked regions can be
-edited, so no click can restructure the layout. To make something new
-editable, add a `data-edit` with an id unique to that page.
+Paragraphs and headings inside `<main>` carry a `data-edit="id"` attribute, and
+so does each **list** — the `<ul>`, not its items. Only marked regions can be
+edited, so no click can restructure the page. To make something new editable,
+add a `data-edit` with an id unique to that page.
+
+**Lists behave like lists.** Because the region is the `<ul>` rather than each
+`<li>`, the browser's own editing applies: Enter starts a new bullet, Backspace
+at the start of one merges it into the previous, and deleting a line removes
+it. Sub-lists work the same way.
+
+On save a list is not patched but **rebuilt** — parsed to a tree and re-emitted
+one `<li>` per line at the file's own indentation (`lib/lists.js`). That is
+what keeps the diffs honest: editing a word changes one line, and adding a
+bullet adds one line, rather than collapsing the list into a single row. It
+also means whatever markup `contenteditable` invents does not survive a round
+trip. A list cannot be emptied entirely; that is refused.
+
+A region must never **contain** another region — saving a container would send
+its children through the sanitiser and flatten them. Marked lists hold no
+marked items, `regions()` filters out any that appear, the server refuses to
+write one, and a test asserts it against the real pages.
 
 ### Environment variables (Vercel)
 

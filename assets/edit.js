@@ -177,8 +177,9 @@ function editLink() {
   if (url === null) return;
 
   if (!url.trim()) { document.execCommand('unlink'); return paint('Link removed.'); }
-  if (!/^(https?:\/\/|mailto:|\/|#)/i.test(url.trim())) {
-    return paint('Links must start with https://, mailto:, / or #.', 'bad');
+  const u = url.trim();
+  if (/^\/\//.test(u) || /^(javascript|data|vbscript|file|blob):/i.test(u)) {
+    return paint('That link scheme is not allowed.', 'bad');
   }
   if (anchor && sel.isCollapsed) {
     anchor.setAttribute('href', url.trim());

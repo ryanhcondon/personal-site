@@ -7,8 +7,9 @@
 
 import { config, PAGES, REPO, ORIGIN } from '../lib/config.js';
 import { authorizeUrl, exchangeCode, getFile, putFile } from '../lib/github.js';
-import { replaceRegion, readRegion } from '../lib/regions.js';
+import { replaceRegion, readRegion, findRegion } from '../lib/regions.js';
 import { sanitize } from '../lib/sanitize.js';
+import { canonicalList } from '../lib/lists.js';
 import {
   parseCookies, readSession, sessionCookie, clearSession, newState, checkState, clearState,
 } from '../lib/session.js';
@@ -86,8 +87,24 @@ export default async function handler(req, res) {
       let text = file.text;
       const applied = [];
       for (const [id, raw] of Object.entries(edits)) {
-        const clean = sanitize(raw);
         try {
+          const where = findRegion(text, id);
+          if (!where) return json(400, { error: `no region called "${id}" on ${page}` });
+
+          // A list is rebuilt from a parsed tree at the indentation the file
+          // already uses, so adding a bullet adds a line instead of collapsing
+          // the whole list onto one. Everything else is inline content.
+          let clean;
+          if (where.tag === 'ul' || where.tag === 'ol') {
+            const lineStart = text.lastIndexOf('\n', where.openStart) + 1;
+            clean = canonicalList(raw, where.openStart - lineStart);
+            if (clean === null) {
+              return json(400, { error: `"${id}" would be left with no items — delete the section instead` });
+            }
+          } else {
+            clean = sanitize(raw);
+          }
+
           // A region containing another region cannot be saved as a unit: its
           // children's markup would go through the sanitiser and be flattened.
           // The client filters these out; the server refuses them, because this
