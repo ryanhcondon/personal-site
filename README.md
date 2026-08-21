@@ -3,7 +3,8 @@
 A clean, professional personal portfolio website showcasing work history, skills, and links.
 
 ## Tech Stack
-- Static HTML/CSS — no build step, no dependencies
+- Static HTML/CSS — no build step, no npm dependencies
+- One serverless function (`api/`) behind the in-place editor — see below
 - Responsive, and light/dark via `prefers-color-scheme`
 - Hosted on Vercel at **ryanhcondon.com**
 
@@ -138,3 +139,65 @@ git commit -m "Update about section and add new skills"
 
 © 2025 Ryan Condon. All rights reserved.
 
+
+
+## Editing the site from the site
+
+The pages can be edited in place, in the browser, by Ryan and nobody else.
+There is **no link to it anywhere** — a visitor sees no trace, and the page
+sends no extra requests and carries no extra markup for them.
+
+1. Visit **`https://www.ryanhcondon.com/?edit=1`** (or `/portfolio.html?edit=1`).
+2. Sign in with GitHub. Only the `ryanhcondon` account is accepted.
+3. **Edit this page** → click any text and type. **Link** turns the selection
+   into a link, or edits/removes one you are inside.
+4. **Save** commits to this repo. Vercel redeploys; live in under a minute.
+
+`?edit=1` is a convenience, not the security. The real gate is a GitHub OAuth
+session in an encrypted, HttpOnly cookie, re-checked on the server for every
+save. Nothing the browser claims is trusted.
+
+### What is editable
+
+Every `<p>`, `<li>`, and heading inside `<main>` carries a `data-edit="id"`
+attribute — 124 regions across the two pages. Only marked regions can be
+edited, so no click can restructure the layout. To make something new
+editable, add a `data-edit` with an id unique to that page.
+
+### Environment variables (Vercel)
+
+| | |
+|---|---|
+| `GITHUB_CLIENT_ID` | From the GitHub OAuth App |
+| `GITHUB_CLIENT_SECRET` | From the GitHub OAuth App |
+| `SESSION_SECRET` | Any long random string; encrypts the session cookie |
+
+Optional: `GITHUB_REPO` (default `ryanhcondon/personal-site`), `GITHUB_BRANCH`
+(default `main`), `ALLOWED_LOGIN` (default `ryanhcondon`).
+
+The OAuth App's callback URL must be
+`https://www.ryanhcondon.com/api/auth/callback` — exactly, including `www`.
+
+Changing `SESSION_SECRET` signs you out everywhere, which is how to revoke a
+session you are worried about.
+
+### Things that will bite
+
+1. **`"type": "module"` in package.json is load-bearing.** Without it every
+   function invocation fails at module load with `FUNCTION_INVOCATION_FAILED`
+   and no further detail, while everything passes locally.
+2. **`lib/regions.js` splices source text, it does not parse HTML.** That is
+   deliberate — parsing and re-serialising would reformat the whole file on
+   every save and make the diffs useless. It refuses to write anything it
+   cannot locate unambiguously.
+3. **Duplicate `data-edit` ids are refused, not guessed.** Ids must be unique
+   per page.
+
+## Tests
+
+```bash
+node --test "tests/*.test.js"
+```
+
+26 tests, covering the splicer's refusals, the sanitiser, and a real edit
+applied to `index.html`. Run them before and after changing `lib/`.

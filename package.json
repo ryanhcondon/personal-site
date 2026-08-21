@@ -1,0 +1,6 @@
+{
+  "name": "personal-site",
+  "private": true,
+  "type": "module",
+  "description": "Static resume site, plus a signed-in editor for its own content."
+}
