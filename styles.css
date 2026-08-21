@@ -228,13 +228,15 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 1.5rem; }
     margin: 0.4rem 0; font-size: 0.95rem; color: var(--ink-soft);
 }
 .experience-list li::before, .skill-list li::before {
-    content: "—"; position: absolute; left: 0;
+    content: "\2022"; position: absolute; left: 0.1rem;
     color: var(--ink-faint);
 }
 
 .experience-sublist { list-style: none; padding: 0; margin: 0.4rem 0 0.6rem; }
 .experience-sublist li { position: relative; padding-left: 1.1rem; margin: 0.3rem 0; font-size: 0.9rem; }
-.experience-sublist li::before { content: "·"; position: absolute; left: 0.25rem; color: var(--accent); font-weight: 700; }
+/* Hollow bullet marks the nested level. Text-coloured, not accent-coloured:
+   an accent marker reads as a link that isn't there. */
+.experience-sublist li::before { content: "\25E6"; position: absolute; left: 0.2rem; color: var(--ink-faint); font-weight: 700; }
 
 /* ===========================
    Card grids
@@ -324,7 +326,7 @@ a.link-card:hover h3 { color: var(--accent); }
     position: relative; padding-left: 1.1rem; margin: 0.35rem 0;
     font-size: 0.88rem; color: var(--ink-soft);
 }
-.project-tools li::before { content: "—"; position: absolute; left: 0; color: var(--ink-faint); }
+.project-tools li::before { content: "\2022"; position: absolute; left: 0.1rem; color: var(--ink-faint); }
 .project-tools strong { color: var(--ink); font-weight: 650; }
 
 .project-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0; margin: 1rem 0 0; }
