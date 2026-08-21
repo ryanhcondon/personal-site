@@ -5,7 +5,7 @@
 // is decoration; the session is re-checked from the cookie on every request
 // that writes, and the page being edited must be one this server named.
 
-import { config, PAGES, REPO } from '../lib/config.js';
+import { config, PAGES, REPO, ORIGIN } from '../lib/config.js';
 import { authorizeUrl, exchangeCode, getFile, putFile } from '../lib/github.js';
 import { replaceRegion } from '../lib/regions.js';
 import { sanitize } from '../lib/sanitize.js';
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   };
 
   if (cfg.error) return json(503, { error: cfg.error });
-  const redirectUri = `${url.origin}/api/auth/callback`;
+  const redirectUri = `${ORIGIN}/api/auth/callback`;
 
   try {
     // --- who am I -------------------------------------------------------
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
       }
       // Two cookies: the new session, and the spent state.
       res.setHeader('Set-Cookie', [sessionCookie(r.token, r.login, cfg.secret), clearState()]);
-      res.writeHead(302, { Location: '/?edit=1' });
+      res.writeHead(302, { Location: `${ORIGIN}/?edit=1` });
       return res.end();
     }
 
