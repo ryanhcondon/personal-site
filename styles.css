@@ -180,11 +180,12 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 1.5rem; }
     margin: 0 0 1.25rem;
 }
 
-/* Grids run the full page; running prose is capped at the reading measure. */
 .section-content { max-width: none; }
 .section-content--wide { max-width: none; }
-#about .section-content,
-#experience .section-content { max-width: var(--measure); }
+/* About and Experience run the full page rather than sitting in a narrow
+   column down the left. Longer lines want a little more leading to stay
+   comfortable, hence the bump. */
+#about .section-content p { line-height: 1.72; }
 
 .section-content > p { margin: 0 0 1.2rem; color: var(--ink-soft); }
 #about p { font-size: 1.02rem; }
@@ -237,32 +238,41 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 1.5rem; }
 
 /* ===========================
    Card grids
-   The 1px gap over a rule-coloured background is rcmtg's `.cards` treatment:
-   one bordered block, hairlines between the cells, no floating boxes.
+
+   Separate bordered cards rather than one ruled sheet. A sheet has to be
+   filled to look right, and none of these counts fill one — 3 quotes and
+   5 links leave gaps that read as "something is missing here". Discrete cards
+   with a real gap have no slots to leave empty, and they make each card an
+   obvious unit, so the link at the foot of one clearly belongs to it.
    =========================== */
-.skills-grid, .testimonials-grid, .links-grid, .portfolio-grid {
-    display: grid; gap: 0;
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    overflow: hidden;
+.skills-grid, .testimonials-grid, .portfolio-grid {
+    display: grid;
+    gap: 1rem;
     margin: 0;
 }
 
 .skills-grid { grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
-.testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
-.links-grid { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
-.portfolio-grid { grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr)); }
+.portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
 .projects-grid { grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr)); }
+
+/* Three quotes: one row of three, or a single stack. Never two columns —
+   that is what left a fourth, empty slot looking like a missing testimonial. */
+.testimonials-grid { grid-template-columns: 1fr; }
+@media (min-width: 58rem) {
+    .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Five links divide into no tidy grid, so let them flow: whatever lands on the
+   last row stretches to fill the width instead of leaving holes. */
+.links-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+.links-grid > * { flex: 1 1 13rem; }
 
 .skill-category, .testimonial-card, .link-card, .portfolio-card {
     background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
     padding: 1.35rem;
     display: flex; flex-direction: column;
-    /* Hairlines drawn by the cells, not by a gap over a coloured backing:
-       the card counts here are odd (3 skills, 3 quotes, 5 links), so a backing
-       would show through as grey blocks wherever the last row is short. */
-    box-shadow: 1px 0 0 var(--rule), 0 1px 0 var(--rule);
 }
 
 .skill-category-title, .portfolio-card-title, .link-card h3 {
@@ -293,7 +303,7 @@ a.link-card:hover h3 { color: var(--accent); }
 .link-note { font-size: 0.75rem !important; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint) !important; }
 
 /* ---- portfolio cards ---- */
-.portfolio-card-body { display: flex; flex-direction: column; flex: 1; }
+.portfolio-card-body { display: flex; flex-direction: column; }
 
 .portfolio-tag {
     margin: 0 0 0.5rem;
@@ -324,13 +334,29 @@ a.link-card:hover h3 { color: var(--accent); }
     border-radius: 999px; padding: 0.15rem 0.6rem;
 }
 
+/* No rule above this and no pinning to the card's foot: a full-width line
+   across the bottom of the card made the link read as its own row, floating
+   between two cards rather than belonging to the article above it. It now
+   sits directly under the description it goes with. */
 .portfolio-link {
-    margin-top: 1.1rem; padding-top: 0.9rem;
-    border-top: 1px solid var(--rule);
-    font-size: 0.9rem; font-weight: 600; text-decoration: none;
+    align-self: flex-start;
+    margin-top: 1.1rem;
+    padding: 0.35rem 0.7rem;
+    background: var(--accent-soft);
+    border-radius: 7px;
+    font-size: 0.88rem; font-weight: 600; text-decoration: none;
 }
-.portfolio-link:hover { text-decoration: underline; }
-.portfolio-link--muted { color: var(--ink-faint); font-weight: 500; }
+.portfolio-link:hover { background: var(--accent); color: var(--bg); }
+.portfolio-link--muted {
+    color: var(--ink-faint); font-weight: 500;
+    background: none; padding-left: 0; padding-right: 0;
+}
+
+/* The whole card responds, so it is obvious which link goes with which
+   article. Only cards that actually have a link — PT Hub has none, and should
+   not pretend otherwise. */
+.portfolio-card:has(a.portfolio-link):hover { border-color: var(--accent); }
+.portfolio-card:has(a.portfolio-link):hover .portfolio-card-title { color: var(--accent); }
 
 /* ===========================
    Utility
