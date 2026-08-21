@@ -79,3 +79,15 @@ for (const file of ['index.html', 'portfolio.html']) {
     }
   });
 }
+
+// The invariant that a live page paid for: a marked region must not contain
+// another marked region. Saving a container flattens its children.
+for (const file of ['index.html', 'portfolio.html']) {
+  test(`no region in ${file} contains another region`, () => {
+    const html = readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+    for (const id of listRegions(html)) {
+      assert.doesNotMatch(readRegion(html, id), /\sdata-edit\s*=/,
+        `${id} contains another editable region`);
+    }
+  });
+}

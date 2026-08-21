@@ -7,7 +7,7 @@
 
 import { config, PAGES, REPO, ORIGIN } from '../lib/config.js';
 import { authorizeUrl, exchangeCode, getFile, putFile } from '../lib/github.js';
-import { replaceRegion } from '../lib/regions.js';
+import { replaceRegion, readRegion } from '../lib/regions.js';
 import { sanitize } from '../lib/sanitize.js';
 import {
   parseCookies, readSession, sessionCookie, clearSession, newState, checkState, clearState,
@@ -88,6 +88,14 @@ export default async function handler(req, res) {
       for (const [id, raw] of Object.entries(edits)) {
         const clean = sanitize(raw);
         try {
+          // A region containing another region cannot be saved as a unit: its
+          // children's markup would go through the sanitiser and be flattened.
+          // The client filters these out; the server refuses them, because this
+          // is the failure that damages a live page rather than showing an error.
+          const existing = readRegion(text, id);
+          if (existing !== null && /\sdata-edit\s*=/.test(existing)) {
+            return json(400, { error: `"${id}" contains other editable regions — edit those directly` });
+          }
           const next = replaceRegion(text, id, clean);
           if (next !== text) { text = next; applied.push(id); }
         } catch (e) {

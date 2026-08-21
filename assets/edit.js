@@ -101,15 +101,33 @@ function paint(msg, kind = '') {
 
 // --- edit mode ------------------------------------------------------------
 
-function regions() { return [...document.querySelectorAll('[data-edit]')]; }
+// A region must never CONTAIN another region. Saving a container sends its
+// children's markup through the sanitiser, which strips list structure and
+// flattens the nested bullets into the parent's text. The pages are marked so
+// this cannot happen; this filter is the belt to that braces, because the cost
+// of being wrong is damage to a live page rather than an error message.
+function regions() {
+  return [...document.querySelectorAll('[data-edit]')]
+    .filter((el) => !el.querySelector('[data-edit]'));
+}
 
 function toggle(on) {
   if (!on && dirty().length && !confirm('Discard your unsaved edits?')) return;
   state.on = on;
+
+  // SNAPSHOT FIRST, THEN MUTATE. Setting contentEditable writes an attribute
+  // into the DOM, so doing it inside the same loop that records the "original"
+  // markup meant an element could be photographed after its neighbours had
+  // already been altered — and it read as edited by someone who had touched
+  // nothing. Two passes, and the baseline is the page exactly as it loaded.
+  if (on) for (const el of regions()) {
+    if (!state.original.has(el.dataset.edit)) state.original.set(el.dataset.edit, el.innerHTML);
+  }
+
   for (const el of regions()) {
     el.contentEditable = on ? 'true' : 'false';
-    if (on && !state.original.has(el.dataset.edit)) {
-      state.original.set(el.dataset.edit, el.innerHTML);
+    if (on && !el.dataset.rcWired) {
+      el.dataset.rcWired = '1';
       // Paste arrives as whatever the source page was wearing. Take the text
       // and drop the costume; the server sanitises too, but this keeps what you
       // SEE while editing honest about what will be saved.
