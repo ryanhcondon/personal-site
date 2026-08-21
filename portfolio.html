@@ -8,34 +8,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header/Hero Section -->
-    <header class="hero">
-        <div class="container">
+    <a class="skip" href="#projects">Skip to content</a>
+
+    <!-- Site header -->
+    <header class="site">
+        <a class="brand" href="index.html">Ryan Condon</a>
+        <nav>
+            <a href="index.html#about">About</a>
+            <a href="index.html#experience">Experience</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="portfolio.html" class="nav-active">Portfolio</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="index.html#links">Connect</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1 class="hero-title">Portfolio</h1>
+                <p class="hero-subtitle">Software I have shipped, and writing I have published.</p>
+            </div>
             <div class="headshot-container">
                 <div class="hero-image-wrapper">
                     <img src="content/headshot-professional.jpg" alt="Ryan Condon headshot" class="hero-image hero-image-zoomed">
                 </div>
             </div>
-            <h1 class="hero-title">Ryan Condon</h1>
-            <p class="hero-subtitle">Portfolio</p>
-        </div>
-    </header>
+        </section>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <ul class="nav-list">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#experience">Experience</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-                <li><a href="portfolio.html" class="nav-active">Portfolio</a></li>
-                <li><a href="index.html#testimonials">Testimonials</a></li>
-                <li><a href="index.html#links">Connect</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main>
         <!-- Intro -->
         <section class="section section--intro">
             <div class="container">
@@ -184,10 +185,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Ryan Condon. All rights reserved.</p>
-        </div>
+    <footer class="site">
+        <p>&copy; 2026 Ryan Condon</p>
+        <p><a href="mailto:ryanhcondon@gmail.com">ryanhcondon@gmail.com</a></p>
     </footer>
 
 </body>

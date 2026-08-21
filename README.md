@@ -3,58 +3,59 @@
 A clean, professional personal portfolio website showcasing work history, skills, and links.
 
 ## Tech Stack
-- Static HTML/CSS
-- Responsive design (mobile, tablet, desktop)
-- Hosted on GitHub Pages (free)
+- Static HTML/CSS — no build step, no dependencies
+- Responsive, and light/dark via `prefers-color-scheme`
+- Hosted on Vercel at **ryanhcondon.com**
+
+## Design
+
+The stylesheet shares its design tokens with **rcmtg.com** (the writing site):
+same warm-paper palette, same serif/sans pairing, same burnt-sienna accent.
+The source of truth for those values is that repo's `assets/styles.css` — if a
+colour changes there, mirror it in the `:root` block at the top of `styles.css`.
+Two separate sites on purpose: this one is the CV, that one is the writing.
 
 ## Local Development
 
-To view the site locally, simply open `index.html` in your web browser:
-- Right-click `index.html` → Open With → Your browser
-- Or drag `index.html` into an open browser window
-
-## Deployment to GitHub Pages
-
-### First-Time Setup
-
-1. **Create a GitHub repository**:
-   - Go to [github.com](https://github.com) and log in
-   - Click "New repository"
-   - Name it something like `ryans-website` or `portfolio`
-   - Make it Public (required for free GitHub Pages)
-   - Don't add README, .gitignore, or license (we already have those)
-   - Click "Create repository"
-
-2. **Connect your local repo to GitHub**:
-   ```bash
-   cd "/Users/RyanCondon/Desktop/Projects/Ryan's Website"
-   git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-   git branch -M main
-   git push -u origin main
-   ```
-   (Replace YOUR-USERNAME and YOUR-REPO-NAME with your actual values)
-
-3. **Enable GitHub Pages**:
-   - Go to your repo on GitHub
-   - Click "Settings" → "Pages" (in the left sidebar)
-   - Under "Source", select "main" branch
-   - Click "Save"
-   - GitHub will show you your live URL: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/`
-
-4. **Wait a minute**, then visit your URL - your site is live!
-
-### Updating the Live Site
-
-After making changes to `index.html`, `styles.css`, or any other files:
+No server needed for a quick look — open `index.html` in a browser. To check
+relative paths the way the host serves them:
 
 ```bash
-cd "/Users/RyanCondon/Desktop/Projects/Ryan's Website"
-git add .
-git commit -m "Description of your changes"
+python3 -m http.server 8765
+```
+
+Then visit http://localhost:8765.
+
+## Deployment
+
+Vercel is connected to this repo. **Pushing to `main` deploys.**
+
+```bash
+git add -A
+git commit -m "Describe the change"
 git push
 ```
 
-GitHub will automatically redeploy your site within 1-2 minutes.
+The build finishes in well under a minute; there is no build step, Vercel just
+serves the repo root.
+
+### DNS
+
+`ryanhcondon.com` is registered through Vercel but its DNS is served by
+**Cloudflare** (`marge`/`sage.ns.cloudflare.com`). So the records live in the
+Cloudflare dashboard, not in Vercel:
+
+- **A** `@` → the apex IP shown in the Vercel project's Domains tab
+- **CNAME** `www` → `cname.vercel-dns.com`
+
+Set both to **DNS only (grey cloud)**. Proxying them through Cloudflare puts a
+second CDN in front of Vercel's and interferes with certificate issuance.
+
+### The old GitHub Pages site
+
+`ryanhcondon.github.io/personal-site/` was the previous home. It can keep
+serving harmlessly, but once ryanhcondon.com is verified, turn Pages off in the
+repo's Settings so there is only one live copy.
 
 ## Updating Content
 
@@ -71,10 +72,13 @@ Edit `index.html` to replace placeholder content:
 
 ### Customizing Colors/Fonts
 
-Edit `styles.css` at the top (lines 5-20) - CSS custom properties:
-- `--color-primary`: Main heading color
-- `--color-accent`: Link and highlight color
-- `--font-heading`: Heading font family
+Edit the `:root` block at the top of `styles.css`:
+- `--ink` / `--ink-soft` / `--ink-faint`: text, in three weights of emphasis
+- `--accent`: links and highlights
+- `--rule`: every hairline on the page
+- `--serif` / `--sans`: the two type stacks
+
+Every one of these has a dark-mode counterpart further down. Change both.
 
 ### Adding Images
 
@@ -121,7 +125,7 @@ git commit -m "Update about section and add new skills"
 
 ## Getting Help
 
-- **GitHub Pages documentation**: [docs.github.com/pages](https://docs.github.com/en/pages)
+- **Vercel documentation**: [vercel.com/docs](https://vercel.com/docs)
 - **HTML reference**: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - **CSS reference**: [MDN CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 

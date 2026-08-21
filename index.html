@@ -34,40 +34,41 @@
             });
         });
     </script>
-    <!-- Header/Hero Section -->
-    <header class="hero">
-        <div class="container">
+    <a class="skip" href="#about">Skip to content</a>
+
+    <!-- Site header -->
+    <header class="site">
+        <a class="brand" href="index.html">Ryan Condon</a>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#links">Connect</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1 class="hero-title">Ryan Condon</h1>
+                <p class="hero-subtitle">Professional Magic Player &middot; Data Engineer &middot; Collaborative Problem Solver</p>
+            </div>
             <div class="headshot-container">
                 <div class="hero-image-wrapper">
                     <img src="content/headshot.jpg" alt="Ryan Condon headshot" class="hero-image" id="headshot-img">
                 </div>
-                <p class="headshot-caption">Choose your headshot!</p>
+                <p class="headshot-caption">Choose your headshot</p>
                 <div class="headshot-toggle">
                     <button class="toggle-btn active" data-image="content/headshot.jpg">Personal</button>
                     <button class="toggle-btn" data-image="content/headshot-professional.jpg">Professional</button>
                 </div>
             </div>
-            <h1 class="hero-title">Ryan Condon</h1>
-            <p class="hero-subtitle">Professional Magic Player • Data Engineer • Collaborative Problem Solver</p>
-        </div>
-    </header>
+        </section>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <ul class="nav-list">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#links">Connect</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
         <!-- About Section -->
         <section id="about" class="section">
             <div class="container">
@@ -201,7 +202,7 @@
                             </ul>
                         </div>
                     </div>
-                    <p style="text-align: center; margin-top: var(--spacing-md);"><a href="portfolio.html" style="font-weight: 600;">View my full portfolio →</a></p>
+                    <p class="more"><a href="portfolio.html">View my full portfolio →</a></p>
                 </div>
             </div>
         </section>
@@ -290,10 +291,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Ryan Condon. All rights reserved.</p>
-        </div>
+    <footer class="site">
+        <p>&copy; 2026 Ryan Condon</p>
+        <p><a href="mailto:ryanhcondon@gmail.com">ryanhcondon@gmail.com</a></p>
     </footer>
 
 </body>
