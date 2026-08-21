@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Condon — now at ryanhcondon.com</title>
+<link rel="canonical" href="https://ryanhcondon.com/">
+<meta http-equiv="refresh" content="0; url=https://ryanhcondon.com/">
+<script>
+  /* GitHub Pages cannot serve a 301, so this is the redirect. It runs during
+     parse, ahead of the meta refresh above, which is the no-JS fallback.
+     The path is carried across: /personal-site/portfolio.html lands on
+     ryanhcondon.com/portfolio.html rather than dumping everyone on the
+     homepage. Query string and #anchor come along too. */
+  (function () {
+    var path = location.pathname.replace(/^\/personal-site/, "");
+    if (path === "" || path === "/index.html") path = "/";
+    location.replace("https://ryanhcondon.com" + path + location.search + location.hash);
+  })();
+</script>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: #fbfaf8; color: #1c1a17;
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    text-align: center; padding: 1.5rem;
+  }
+  a { color: #8a3324; }
+  p { max-width: 26rem; margin: 0; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #14130f; color: #ece7dd; }
+    a { color: #e0876f; }
+  }
+</style>
+</head>
+<body>
+  <p>This site has moved to <a href="https://ryanhcondon.com/">ryanhcondon.com</a>.</p>
+</body>
+</html>
