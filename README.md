@@ -53,9 +53,14 @@ second CDN in front of Vercel's and interferes with certificate issuance.
 
 ### The old GitHub Pages site
 
-`ryanhcondon.github.io/personal-site/` was the previous home. It can keep
-serving harmlessly, but once ryanhcondon.com is verified, turn Pages off in the
-repo's Settings so there is only one live copy.
+`ryanhcondon.github.io/personal-site/` was the previous home, and it is linked
+from LinkedIn and from older posts that cannot all be edited. The **`gh-pages`
+branch** exists solely to redirect those links to ryanhcondon.com — it holds an
+`index.html` and a `404.html` and nothing else. Pages is pointed at that branch,
+so the old URL keeps working without serving a second copy of the site.
+
+**Never point Pages back at `main`.** That would put the whole site live at two
+addresses at once, competing in search results. See the README on `gh-pages`.
 
 ## Updating Content
 
