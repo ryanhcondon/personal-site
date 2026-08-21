@@ -157,6 +157,21 @@ sends no extra requests and carries no extra markup for them.
 session in an encrypted, HttpOnly cookie, re-checked on the server for every
 save. Nothing the browser claims is trusted.
 
+### Keeping this checkout in step
+
+**The site can now edit itself, so `main` moves without this clone knowing.**
+Every save from the browser is a commit made directly on GitHub.
+
+```bash
+git pull        # before any local work, and before asking Claude to change anything here
+```
+
+Nothing else is required. The editor reads the file **from GitHub** and writes
+it back with the blob sha it just read, so a stale copy here cannot corrupt a
+save, and a concurrent change is refused rather than clobbered. Git will also
+refuse a non-fast-forward push, so the worst case of forgetting is a merge
+conflict — never a lost edit.
+
 ### What is editable
 
 Every `<p>`, `<li>`, and heading inside `<main>` carries a `data-edit="id"`
