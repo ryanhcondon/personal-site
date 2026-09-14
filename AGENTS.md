@@ -87,6 +87,6 @@ git pull                         # ALWAYS, before local work
 
 ## Still to do
 
-- Portfolio sample posts still link to `patreon.com/posts/...` and should point
-  at `rcmtg.com/p/<slug>/` via `patreon_id` in frontmatter. About / Experience /
-  Connect already point at rcmtg.com. **PT Hub stays unlinked on purpose.**
+- Writing samples on the portfolio (and the matching skill-line links on
+  home) point at `rcmtg.com/p/<slug>/`. The Connect Patreon card stays
+  `patreon.com/ryancmtg`. **PT Hub stays unlinked on purpose.**
