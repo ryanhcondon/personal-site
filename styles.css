@@ -358,6 +358,14 @@ span.portfolio-link { cursor: default; }
 .portfolio-card:has(a.portfolio-link):hover { border-color: var(--accent); }
 .portfolio-card:has(a.portfolio-link):hover .portfolio-card-title { color: var(--accent); }
 
+/* ---- education ---- */
+/* The certificate card carries its badge beside the text. The text has a
+   minimum it will not shrink below, so in a narrow card it wraps under the
+   badge instead of being squeezed into a sliver next to it. */
+.credential-card { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 1rem 1.25rem; }
+.credential-badge { width: 9rem; flex: none; }
+.credential-card .portfolio-card-body { flex: 1 1 14rem; min-width: 0; }
+
 /* ===========================
    Utility
    =========================== */
