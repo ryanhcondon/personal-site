@@ -255,7 +255,9 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 1.5rem; }
 
 .skills-grid { grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
 .portfolio-grid { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
-.projects-grid { grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr)); }
+/* min(…, 100%): 24rem is wider than a phone, and a bare minimum would push the
+   cards past the screen edge instead of letting them shrink to fit it. */
+.projects-grid { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
 
 /* Three quotes: one row of three, or a single stack. Never two columns —
    that is what left a fourth, empty slot looking like a missing testimonial. */
